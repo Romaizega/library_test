@@ -38,7 +38,8 @@ class User(AbstractUser):
     )
     phone_number = PhoneNumberField(
         max_length=MAX_PHONE_NUMBER_LENGTH,
-        default=''
+        default='',
+        verbose_name='Номер телефона'
     )
 
     USERNAME_FIELD = 'email'
