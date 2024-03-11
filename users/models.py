@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
 
 from users.constants import (MAX_EMAIL_LENGTH, MAX_FIELD_LENGTH,
                              MAX_PHONE_NUMBER_LENGTH)
@@ -35,21 +36,13 @@ class User(AbstractUser):
         max_length=MAX_FIELD_LENGTH,
         verbose_name='Фамилия'
     )
-    phone_number = models.CharField(
-        max_lenght=MAX_PHONE_NUMBER_LENGTH,
-        verbose_name='Номер телефона',
-        unique=True,
-        validators=[
-            RegexValidator(
-                regex=r'^\+?1?\d{9,15}$',
-                message=('Номер телефона должен содержать от 9 до 15 цифр и '
-                         'может начинаться с +')
-            )
-        ]
+    phone_number = PhoneNumberField(
+        max_length=MAX_PHONE_NUMBER_LENGTH,
+        default=''
     )
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
+    REQUIRED_FIELDS = ['username', 'first_name', 'last_name', 'phone_number']
 
     class Meta:
         verbose_name = 'Пользователь'
