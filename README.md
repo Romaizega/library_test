@@ -61,9 +61,9 @@ pip install -r requirements.txt
 + Установить локально [Docker compose](https://www.docker.com/)
 + Создать файлы .env в папках library и infra 
 ```
-POSTGRES_USER=foodgram_user
+POSTGRES_USER=library_user
 POSTGRES_DB=django
-POSTGRES_PASSWORD=foodgram_password
+POSTGRES_PASSWORD=library_password
 DB_HOST=db
 SECRET_KEY=(SECRET_KEY)
 ALLOWED_HOSTS=(ALLOWED_HOSTS)
