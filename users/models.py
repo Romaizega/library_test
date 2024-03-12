@@ -62,6 +62,8 @@ class User(AbstractUser):
 
 
 class UserOrganisation(models.Model):
+    """Модель пользователя-организации."""
+
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,

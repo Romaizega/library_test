@@ -22,16 +22,21 @@ class LibraryUserViewSet(UserViewSet):
 
 
 class UserOrganisationViewSet(viewsets.ReadOnlyModelViewSet):
+    """ViewSet для доступа только на чтение к модели UserOrganisation."""
+
     queryset = UserOrganisation.objects.all().order_by('id')
     serializer_class = UserOrganisationSerializer
     pagination_class = LimitPagination
 
 
 class OrganisationViewSet(viewsets.ModelViewSet):
+    """ViewSet для работы с организациями."""
+
     queryset = Organisation.objects.all()
     serializer_class = OrganisationSerializer
 
     def create_organizations(self, request, *args, **kwargs):
+        """Создает организацию."""
         serializer = OrganisationSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -40,6 +45,8 @@ class OrganisationViewSet(viewsets.ModelViewSet):
 
 
 class EventsViewSet(viewsets.ModelViewSet):
+    """ViewSet для работы с мероприятиями."""
+
     queryset = Events.objects.all()
     serializer_class = EventSerializer
     filter_backends = (filters.DjangoFilterBackend,)
@@ -48,12 +55,12 @@ class EventsViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=('post',),
             permission_classes=[IsAuthenticated])
     def create_event_view(self, request):
+        """Создает мероприятие."""
         title = request.data.get('title')
         description = request.data.get('description')
         organizations = request.data.get('organizations')
         image = request.data.get('image')
         date = request.data.get('date')
-
         create_event_with_delay.delay(
             title, description, organizations, image, date)
         return Response(status=status.HTTP_201_CREATED)

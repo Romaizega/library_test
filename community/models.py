@@ -6,6 +6,16 @@ from community.constants import (MAX_CHAR_FIELD_LENGTH,
 
 
 class Organisation(models.Model):
+    """
+    Модель организация.
+
+    Attributes:
+        title (CharField): Название организации.
+        description (TextField): Описание организации.
+        address (CharField): Адрес организации.
+        postcode (CharField): Почтовый индекс организации.
+    """
+
     title = models.CharField(
         max_length=MAX_CHAR_FIELD_LENGTH,
         verbose_name='Название организации'
@@ -37,6 +47,16 @@ class Organisation(models.Model):
 
 
 class Events(models.Model):
+    """   Модель, представляющая мероприятие.
+
+    Attributes:
+        title (CharField): Название мероприятия.
+        description (TextField): Описание мероприятия.
+        organizations (ManyToManyField): Организаторы мероприятия.
+        image (ImageField): Фотография мероприятия (опционально).
+        date (DateField): Дата проведения мероприятия.
+    """
+
     title = models.CharField(
         max_length=MAX_CHAR_FIELD_LENGTH,
         verbose_name='Название мероприятия'
