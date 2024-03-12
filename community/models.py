@@ -1,4 +1,6 @@
+from django.core.validators import RegexValidator
 from django.db import models
+
 from community.constants import (MAX_CHAR_FIELD_LENGTH,
                                  MAX_CHAR_FIELD_POSTCODE_LENGTH)
 
@@ -17,7 +19,12 @@ class Organisation(models.Model):
     )
     postcode = models.CharField(
         max_length=MAX_CHAR_FIELD_POSTCODE_LENGTH,
-        verbose_name='Почтовый индекс'
+        verbose_name='Почтовый индекс',
+        validators=[
+            RegexValidator(
+                regex=r'^\d{6}$',
+                message='Почтовый индекс должен содержать 6 цифр')
+        ]
     )
 
     class Meta:

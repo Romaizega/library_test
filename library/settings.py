@@ -4,9 +4,10 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-load_dotenv()
-
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+load_dotenv()
 
 SECRET_KEY = 'django-insecure-8%0ncp$nd+#k&4(@j#!v0xgtyl(0#l@t%5&khn^77)hj#0ll7e'
 
@@ -26,6 +27,7 @@ INSTALLED_APPS = [
     'community.apps.CommunityConfig',
     'phonenumber_field',
     'rest_framework',
+    'rest_framework_simplejwt',
     'djoser',
     'rest_framework.authtoken',
 ]
@@ -93,8 +95,9 @@ REST_FRAMEWORK = {
     ],
 
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ],
+    'DEFAULT_PAGINATION_CLASS': 'api.pagination.LimitPagination',
 }
 
 
@@ -113,8 +116,14 @@ USE_I18N = True
 USE_TZ = True
 
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'collected_static'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.User'
+
+DEFAULT_PAGE_SIZE = 10
