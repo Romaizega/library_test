@@ -71,7 +71,7 @@ DEBUG=False
 ```
 + Запустить проект через `docker compose up`:
 ```shell script
-cd foodgram-project-react/infta
+cd library/infta
 ```
 
 ```shell script
