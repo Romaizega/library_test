@@ -15,7 +15,8 @@ class Organisation(models.Model):
     )
     address = models.CharField(
         max_length=MAX_CHAR_FIELD_LENGTH,
-        verbose_name='Адрес организации'
+        verbose_name='Адрес организации',
+        help_text='Введите полный адрес организации'
     )
     postcode = models.CharField(
         max_length=MAX_CHAR_FIELD_POSTCODE_LENGTH,
