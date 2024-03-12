@@ -9,6 +9,9 @@
 
  [![PostgreSQL](https://img.shields.io/badge/-PostgreSQL-464646?style=flat&logo=PostgreSQL&logoColor=56C0C0&color=3d85c6)](https://www.postgresql.org/)
 
+ [![Django Rest Framework](https://img.shields.io/badge/-Django%20Rest%20Framework-464646?style=flat&logo=django&logoColor=56C0C0&color=3d85c6)](https://www.django-rest-framework.org/)
+
+
 
 ### Рекомендации по развертыванию проекта локально
 
