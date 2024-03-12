@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'community.apps.CommunityConfig',
     'phonenumber_field',
     'rest_framework',
+    'django_filters',
     'rest_framework_simplejwt',
     'djoser',
     'rest_framework.authtoken',
@@ -93,7 +94,10 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
-
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter',
+    ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
     ],
@@ -127,3 +131,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.User'
 
 DEFAULT_PAGE_SIZE = 10
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
