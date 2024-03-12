@@ -64,7 +64,7 @@ pip install -r requirements.txt
 POSTGRES_USER=library_user
 POSTGRES_DB=django
 POSTGRES_PASSWORD=library_password
-DB_HOST=db
+DB_HOST=localhost
 SECRET_KEY=(SECRET_KEY)
 ALLOWED_HOSTS=(ALLOWED_HOSTS)
 DEBUG=False
