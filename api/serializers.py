@@ -11,15 +11,7 @@ class LibraryUserSerializer(UserSerializer):
 
     class Meta(UserSerializer.Meta):
         model = User
-        fields = '__all__'
-
-
-class UserOrganisationSerializer(serializers.ModelSerializer):
-    """Сериализатор для модели UserOrganisation"""
-
-    class Meta:
-        model = UserOrganisation
-        fields = '__all__'
+        fields = ('username', 'first_name', 'last_name', 'email')
 
 
 class OrganisationSerializer(serializers.ModelSerializer):
@@ -30,10 +22,23 @@ class OrganisationSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class UserOrganisationSerializer(serializers.ModelSerializer):
+    """Сериализатор для модели UserOrganisation"""
+
+    user = LibraryUserSerializer(read_only=True)
+    organisation = OrganisationSerializer(read_only=True)
+
+    class Meta:
+        model = UserOrganisation
+        fields = '__all__'
+
+
 class EventSerializer(serializers.ModelSerializer):
     """Сериализатор для модели Event"""
 
-    image = Base64ImageField()
+    organizations = OrganisationSerializer(
+        many=True,
+        read_only=True)
 
     class Meta:
         model = Events
